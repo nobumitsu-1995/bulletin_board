@@ -1,2 +1,5 @@
-<p><%= post.content %></p>
-<p><%= post.created_at %></p>
+<div id="post_<%= post.id %>">
+  <p><%= post.content %></p>
+  <p><%= post.created_at %></p>
+  <%= link_to("削除", "/posts/#{post.id}", method: :delete, remote: true) %>
+</div>
