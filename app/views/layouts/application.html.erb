@@ -8,9 +8,83 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
-
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">掲示板</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" data-toggle="modal" data-target="#signin">新規登録</a>
+          <a class="nav-item nav-link"  data-toggle="modal" data-target="#login">ログイン</a>
+        </div>
+      </div>
+    </nav>
+  </header>
   <body>
     <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <div class="modal-list">
+      <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">新規登録</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_with(local: false, class: "text-center") do |f| %>
+                <%= f.label :name, "名前" %><br>
+                <%= f.text_field :name %><br>
+                <%= f.label :email, "メールアドレス" %><br>
+                <%= f.text_field :email %><br>
+                <%= f.label :password, "パスワード" %><br>
+                <%= f.text_field :password %><br>
+                <%= f.label :password_confirmation, "※パスワードをもう一度入力してください。" %><br>
+                <%= f.text_field :password_confirmation %><br>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              <button type="button" class="btn btn-primary">新規登録</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">ログイン</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_with(model: @user, local: false, class: "text-center") do |f| %>
+                <%= f.label :email, "メールアドレス" %><br>
+                <%= f.text_field :email %><br>
+                <%= f.label :password, "パスワード" %><br>
+                <%= f.text_field :password %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              <button type="button" class="btn btn-primary">ログイン</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
+  <footer>
+
+  </footer>
 </html>
