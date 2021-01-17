@@ -5,8 +5,11 @@ class UsersController < ApplicationController
         @user = User.create!(user_params)
         session[:user_id] = @user.id
         @current_user = User.find_by(id: session[:user_id])
+        redirect_to("/")
       else
+        @posts = Post.all.order(id: "desc")
         flash[:notice] = "パスワードが一致しません"
+        render("posts/index")
       end
     else
 
@@ -19,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by(id: params[:id])
 
   end
 
@@ -28,14 +30,18 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "#{@user.name}でログインしました。"
+      redirect_to("/")
     else
       flash[:notice] = "ログイン情報が間違っています。"
+      @posts = Post.all.order(id: "desc")
+      render("posts/index")
     end
   end
 
   def logout
     session[:user_id] = nil
     flash[:notice] = "ログアウトしました。"
+    redirect_to("/")
   end
 
   private
