@@ -1,18 +1,20 @@
 class UsersController < ApplicationController
   def create
-    if params[:password] && params[:password_confirmation]
+    if params[:password] == true
       if params[:password] == params[:password_confirmation]
         @user = User.create!(user_params)
-        session[:user_id] = @user.id
-        @current_user = User.find_by(id: session[:user_id])
-        redirect_to("/")
+        if @user.save
+          session[:user_id] = @user.id
+          redirect_to("/")
+        end
       else
         @posts = Post.all.order(id: "desc")
         flash[:notice] = "パスワードが一致しません"
         render("posts/index")
       end
     else
-
+      flash[:notice] = "パスワードを入力してください"
+      redirect_to("/")
     end
   end
 
@@ -26,15 +28,14 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
+    @user = User.find_by(email: params[:login_email])
+    if @user && @user.authenticate(params[:login_password])
       session[:user_id] = @user.id
       flash[:notice] = "#{@user.name}でログインしました。"
       redirect_to("/")
     else
       flash[:notice] = "ログイン情報が間違っています。"
-      @posts = Post.all.order(id: "desc")
-      render("posts/index")
+      redirect_to("/")
     end
   end
 
