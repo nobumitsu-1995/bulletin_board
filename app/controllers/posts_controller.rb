@@ -7,6 +7,13 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create!(post_params)
+    if @current_user
+      @post.user = @current_user.id
+      @post.save
+    else
+      @post.user = nil
+      @post.save
+    end
   end
 
   def destroy

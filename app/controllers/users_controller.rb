@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
   def create
-    if params[:password] == true
+    if params[:password]
       if params[:password] == params[:password_confirmation]
         @user = User.create!(user_params)
         if @user.save
           session[:user_id] = @user.id
+          flash[:notice] = "#{@user.name}でログインしました。"
           redirect_to("/")
+        else
+          @posts = Post.all.order(id: "desc")
+          flash[:notice] = "ユーザー登録に失敗しました。"
+          render("posts/index")
         end
       else
         @posts = Post.all.order(id: "desc")
