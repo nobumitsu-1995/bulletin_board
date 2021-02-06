@@ -7,13 +7,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div id="user_form">
+      <div>
         <%= form_with(url: users_login_path, method: :post, class: "text-center") do |f| %>
         <div class="modal-body">
           <%= f.label :login_email, "メールアドレス" %><br>
           <%= f.text_field :login_email %><br>
           <%= f.label :login_password, "パスワード" %><br>
-          <%= f.text_field :login_password %><br>
+          <%= f.password_field :login_password %><br>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -34,7 +34,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div id="user_form">
+      <div>
         <%= form_with(url: users_path, method: :post, class: "text-center") do |f| %>
         <div class="modal-body">
           <%= f.label :name, "ユーザー名" %><br>
@@ -42,7 +42,41 @@
           <%= f.label :email, "メールアドレス" %><br>
           <%= f.text_field :email %><br>
           <%= f.label :password, "パスワード" %><br>
-          <%= f.text_field :password %><br>
+          <%= f.password_field :password %><br>
+          <%= f.label :password_confirmation, "パスワード確認" %><br>
+          <%= f.password_field :password_confirmation %><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit "登録", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @current_user %>
+<div class="modal fade" id="form_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ユーザー編集</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+        <%= form_with(url: user_path(@current_user.id), method: :patch, multipart: true, class: "text-center") do |f| %>
+        <div class="modal-body">
+          <%= f.label :name, "ユーザー名" %><br>
+          <%= f.text_field :name, value: "#{@current_user.name}" %><br>
+          <%= f.label :email, "メールアドレス" %><br>
+          <%= f.text_field :email, value: "#{@current_user.email}" %><br>
+          <%= f.label :image, "ユーザー画像" %><br>
+          <%= f.file_field :image %><br>
+          <%= f.label :password, "パスワード" %><br>
+          <%= f.password_field :password %><br>
           <%= f.label :password_confirmation, "パスワード確認" %><br>
           <%= f.text_field :password_confirmation %><br>
         </div>
@@ -55,3 +89,4 @@
     </div>
   </div>
 </div>
+<% end %>

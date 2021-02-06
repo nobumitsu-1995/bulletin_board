@@ -1,11 +1,9 @@
-<div class="post row text-center" id="post_<%= post.id %>">
+<div class="post row" id="post_<%= post.id %>">
   <p class="col-1"><%= post.id %></p>
-  <% if post.user %>
-    <p class="col-1"><%= User.find_by(id: post.user).name %></p>
-  <% else %>
-    <p class="col-1">ゲストユーザー</p>
+  <p class="col-3"><%= post.user.name %></p>
+  <p class="col-2"><%= l post.created_at %></p>
+  <% if @current_user && @current_user.id == post.user %>
+    <%= link_to("削除", "/posts/#{post.id}", class: "col-1", method: :delete, remote: true) %>
   <% end %>
-  <p class="col-7 text-left"><%= post.content %></p>
-  <p class="col-2"><%= post.created_at %></p>
-  <%= link_to("削除", "/posts/#{post.id}", class: "col-1", method: :delete, remote: true) %>
 </div>
+<p class="text-left"><%= post.content %></p>

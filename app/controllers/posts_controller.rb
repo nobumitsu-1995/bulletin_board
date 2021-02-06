@@ -1,18 +1,15 @@
 class PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.all.order(id: "desc")
-    @user = User.new
+    @posts = Post.all.order(id: "desc").includes(:user)
   end
 
   def create
-    @post = Post.create!(post_params)
+    @post = Post.new(post_params)
     if @current_user
-      @post.user = @current_user.id
-      @post.save
+      @post.update!(user_id: @current_user.id)
     else
-      @post.user = nil
-      @post.save
+      @post.update!(user_id: 0)
     end
   end
 
