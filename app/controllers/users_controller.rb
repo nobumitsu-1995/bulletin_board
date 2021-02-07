@@ -25,8 +25,8 @@ class UsersController < ApplicationController
   end
 
   def provider_create
-    user = User.find_or_create_account(request.env['omniauth.auth'])
-    session[:login_user_id] = user.id
+    @user = User.find_or_create_account(request.env['omniauth.auth'])
+    session[:login_user_id] = @user.id
     redirect_to("/")
   end
 
@@ -38,12 +38,12 @@ class UsersController < ApplicationController
   def update
     if params[:password] #パスワードに入力がある時
       if params[:password] == params[:password_confirmation]
-        user = User.find_by(id: params[:id])
-        user.update(user_params)
+        @user = User.find_by(id: params[:id])
+        @user.update(user_params)
         if params[:image] #イメージ画像を編集するとき
-          write_image(params[:image)
-          if user.save #処理が正常に行ったとき
-            flash[:notice] = "#{user.name}の情報を編集しました。"
+          write_image(params[:image])
+          if @user.save #処理が正常に行ったとき
+            flash[:notice] = "#{@user.name}の情報を編集しました。"
             redirect_to("/")
           else #処理が正常に行かなかったとき
             @posts = Post.all.order(id: "desc")
@@ -51,8 +51,8 @@ class UsersController < ApplicationController
             render("posts/index")
           end
         else #イメージ画像の編集がない場合
-          if user.save #処理が正常に行ったとき
-            flash[:notice] = "#{user.name}の情報を編集しました。"
+          if @user.save #処理が正常に行ったとき
+            flash[:notice] = "#{@user.name}の情報を編集しました。"
             redirect_to("/")
           else #処理が正常に行かなかったとき
             @posts = Post.all.order(id: "desc")
@@ -67,13 +67,13 @@ class UsersController < ApplicationController
       end
     else #パスワードの編集をしないとき
       if params[:image] #イメージ画像を編集するとき
-        write_image(params[:image)
+        write_image(params[:image])
         user.update(
           name: params[:name],
           email: params[:email]
         )
-        if user.save #処理が正常に行ったとき
-          flash[:notice] = "#{user.name}の情報を編集しました。"
+        if @user.save #処理が正常に行ったとき
+          flash[:notice] = "#{@user.name}の情報を編集しました。"
           redirect_to("/")
         else #処理が正常に行かなかったとき
           @posts = Post.all.order(id: "desc")
@@ -81,12 +81,12 @@ class UsersController < ApplicationController
           render("posts/index")
         end
       else #イメージ画像の編集がない場合
-        user.update(
+        @user.update(
           name: params[:name],
           email: params[:email]
         )
-        if user.save #処理が正常に行ったとき
-          flash[:notice] = "#{user.name}の情報を編集しました。"
+        if @user.save #処理が正常に行ったとき
+          flash[:notice] = "#{@user.name}の情報を編集しました。"
           redirect_to("/")
         else #処理が正常に行かなかったとき
           @posts = Post.all.order(id: "desc")
@@ -121,24 +121,8 @@ class UsersController < ApplicationController
   end
 
   def write_image(params)
-    user.image = "#{user.id}.jpeg"
-    File.binwrite("public/user_image/#{user.image}", params.read)
-  end
-
-  def self.find_or_create_account(auth)
-    provider = auth[:provider]
-    uid = auth[:uid]
-    name = auth[:info][:nickname]
-    image_url = auth[:info][:image]
-    email = auth[:uid]
-    password_digest = auth[:uid]
-
-    self.find_or_create_by(provider: provider, uid: uid) do |user|
-      user.name = name
-      user.email = email
-      user.password_digest = password_digest
-      write_image(image_url)
-    end
+    @user.image = "#{@user.id}.jpeg"
+    File.binwrite("public/user_image/#{@user.image}", params.read)
   end
 
 end

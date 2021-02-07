@@ -10,7 +10,11 @@
       <div class="my-4">
         <ul class="text-center p-0">
           <li>
-            <img class="user_image mb-3" src="<%= "/user_image/#{@current_user.image}" %>">
+            <% if @current_user.provider %>
+              <img class="user_image mb-3" src="<%= @current_user.image %>">
+            <% else %>
+              <img class="user_image mb-3" src="<%= "/user_image/#{@current_user.image}" %>">
+            <% end %>
           </li>
           <li>ユーザー名：　<%= @current_user.name %></li>
           <li>登録メールアドレス：　<%= @current_user.email %></li>
