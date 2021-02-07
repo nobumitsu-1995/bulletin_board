@@ -18,7 +18,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
           <%= f.submit "ログイン", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
-          <a href="/auth/twitter">twitterでログイン</a>
+          <%= link_to "ツイッターログイン" ,"/auth/twitter", method: :post %>
         </div>
         <% end %>
       </div>

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def twitter_create
-
+    redirect_to("/")
   end
 
   def destroy
