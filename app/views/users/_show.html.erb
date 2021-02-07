@@ -9,16 +9,22 @@
       </div>
       <div class="my-4">
         <ul class="text-center p-0">
-          <li>
-            <% if @current_user.provider %>
+          <% if @current_user.provider %>
+            <li>
               <img class="user_image mb-3" src="<%= @current_user.image %>">
-            <% else %>
+            </li>
+            <li>ユーザーID：　<%= @current_user.id %></li>
+            <li>ユーザー名：　<%= @current_user.name %></li>
+            <li><%= @current_user.provider %>のアカウントでログインしています。</li>
+          <% else %>
+            <li>
               <img class="user_image mb-3" src="<%= "/user_image/#{@current_user.image}" %>">
-            <% end %>
-          </li>
-          <li>ユーザー名：　<%= @current_user.name %></li>
-          <li>登録メールアドレス：　<%= @current_user.email %></li>
-          <li><button class="text-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#form_edit">編集</button></li>
+            </li>
+            <li>ユーザーID：　<%= @current_user.id %></li>
+            <li>ユーザー名：　<%= @current_user.name %></li>
+            <li>登録メールアドレス：　<%= @current_user.email %></li>
+            <li><button class="text-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#form_edit">編集</button></li>
+          <% end %>
         </ul>
       </div>
     </div>
