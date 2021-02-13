@@ -1,0 +1,16 @@
+<%= form_with(url: users_path, method: :post, class: "text-center") do |f| %>
+<div class="modal-body">
+  <%= f.label :name, "ユーザー名" %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label :email, "メールアドレス" %><br>
+  <%= f.text_field :email %><br>
+  <%= f.label :password, "パスワード" %><br>
+  <%= f.password_field :password %><br>
+  <%= f.label :password_confirmation, "パスワード確認" %><br>
+  <%= f.password_field :password_confirmation %><br>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+  <%= f.submit "登録", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+</div>
+<% end %>

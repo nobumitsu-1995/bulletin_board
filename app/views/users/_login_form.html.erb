@@ -1,0 +1,13 @@
+<%= form_with(url: users_login_path, method: :post, class: "text-center") do |f| %>
+<div class="modal-body">
+  <%= f.label :login_email, "メールアドレス" %><br>
+  <%= f.text_field :login_email %><br>
+  <%= f.label :login_password, "パスワード" %><br>
+  <%= f.password_field :login_password %><br>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+  <%= f.submit "ログイン", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+  <%= link_to "Twitterログイン" ,"/auth/twitter", method: :post, class: "btn btn-primary"%>
+</div>
+<% end %>

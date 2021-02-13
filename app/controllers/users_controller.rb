@@ -115,6 +115,20 @@ class UsersController < ApplicationController
     redirect_to("/")
   end
 
+  def new
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def login_form
+  end
+
   private
   def user_params
     params.permit(:name, :password, :email)

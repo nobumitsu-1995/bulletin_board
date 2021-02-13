@@ -1,32 +1,23 @@
-<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ユーザー情報</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="my-4">
-        <ul class="text-center p-0">
-          <% if @current_user.provider %>
-            <li>
-              <img class="user_image mb-3" src="<%= @current_user.image %>">
-            </li>
-            <li>ユーザーID：　<%= @current_user.id %></li>
-            <li>ユーザー名：　<%= @current_user.name %></li>
-            <li><%= @current_user.provider %>のアカウントでログインしています。</li>
-          <% else %>
-            <li>
-              <img class="user_image mb-3" src="<%= "/user_image/#{@current_user.image}" %>">
-            </li>
-            <li>ユーザーID：　<%= @current_user.id %></li>
-            <li>ユーザー名：　<%= @current_user.name %></li>
-            <li>登録メールアドレス：　<%= @current_user.email %></li>
-            <li><button class="text-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#form_edit">編集</button></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
+<ul class="text-center p-0">
+  <% if @user.provider %>
+  <li>
+    <img class="user_image mb-3" src="<%= @user.image %>">
+  </li>
+  <li>ユーザーID：　<%= @user.id %></li>
+  <li>ユーザー名：　<%= @user.name %></li>
+  <li><%= @user.provider %>のアカウントでログインしています。</li>
+  <% else %>
+  <li>
+    <img class="user_image mb-3" src="<%= "/user_image/#{@user.image}" %>">
+  </li>
+  <li>ユーザーID：　<%= @user.id %></li>
+  <li>ユーザー名：　<%= @user.name %></li>
+  <li>登録メールアドレス：　<%= @user.email %></li>
+  <% end %>
+</ul>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+  <% if @current_user.id == @user.id %>
+    <%= link_to("編集", edit_user_path(@user.id), remote: true, "btn btn-primary") %>
+  <% end %>
 </div>

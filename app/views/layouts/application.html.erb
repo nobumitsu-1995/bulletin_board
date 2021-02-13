@@ -20,11 +20,11 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
           <% if @current_user %>
-            <%= link_to("ログイン中のユーザー：#{@current_user.name}", "#", class: "nav-item nav-link",  data: {toggle: "modal", target: "#show"}) %>
+            <%= link_to("ログイン中のユーザー：#{@current_user.name}", user_path(@current_user.id), remote: true, class: "nav-item nav-link") %>
             <%= link_to("ログアウト", users_logout_path, method: :post, class: "nav-item nav-link") %>
           <% else %>
-            <%= link_to("新規登録", "#", class: "nav-item nav-link", data: {toggle: "modal", target: "#form_new"}) %>
-            <%= link_to("ログイン", "#", class: "nav-item nav-link", data: {toggle: "modal", target: "#form_login"}) %>
+            <%= link_to("新規登録", new_user_path, remote: true, class: "nav-item nav-link") %>
+            <%= link_to("ログイン", users_login_form_path, remote: true, class: "nav-item nav-link") %>
           <% end %>
         </div>
       </div>
@@ -37,11 +37,20 @@
     </div>
     <% end %>
     <%= yield %>
-    <div id="modal">
-      <%= render "users/form" %>
-      <% if @current_user %>
-        <%= render "users/show" %>
-      <% end %>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalSubject" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalSubject"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="modalBody" class="my-4">
+
+          </div>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
