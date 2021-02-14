@@ -9,5 +9,6 @@
   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
   <%= f.submit "ログイン", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
   <%= link_to "Twitterログイン" ,"/auth/twitter", method: :post, class: "btn btn-primary"%>
-</div>
+  <%= link_to "Facebookログイン" ,"/auth/facebook", method: :post, class: "btn btn-primary"%>
+
 <% end %>

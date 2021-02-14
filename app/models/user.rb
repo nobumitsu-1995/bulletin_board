@@ -5,7 +5,7 @@ class User < ApplicationRecord
   def self.find_or_create_account(auth)
     provider = auth[:provider]
     uid = auth[:uid]
-    name = auth[:info][:nickname]
+    name = auth[:info][:name]
     image = auth[:info][:image]
     email = auth[:uid]
     password_digest = auth[:uid]
