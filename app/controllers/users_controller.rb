@@ -27,6 +27,12 @@ class UsersController < ApplicationController
   def provider_create
     @user = User.find_or_create_account(request.env['omniauth.auth'])
     session[:login_user_id] = @user.id
+    flash[:notice] = "#{@user.name}でログインしました。"
+    redirect_to("/")
+  end
+
+  def provider_fail
+    flash[:notice] = "ログインに失敗しました。"
     redirect_to("/")
   end
 
