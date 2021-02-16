@@ -1,16 +1,31 @@
 <%= form_with(url: users_path, method: :post, class: "text-center") do |f| %>
-<div class="modal-body">
-  <%= f.label :name, "ユーザー名" %><br>
-  <%= f.text_field :name %><br>
-  <%= f.label :email, "メールアドレス" %><br>
-  <%= f.text_field :email %><br>
-  <%= f.label :password, "パスワード" %><br>
-  <%= f.password_field :password %><br>
-  <%= f.label :password_confirmation, "パスワード確認" %><br>
-  <%= f.password_field :password_confirmation %><br>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-  <%= f.submit "登録", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+<div class="row">
+  <div class="modal-body col-6">
+    <%= f.label :name, "ユーザー名" %><br>
+    <%= f.text_field :name %><br>
+    <%= f.label :email, "メールアドレス" %><br>
+    <%= f.text_field :email %><br>
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.password_field :password %><br>
+    <%= f.label :password_confirmation, "パスワード確認" %><br>
+    <%= f.password_field :password_confirmation %><br>
+    <%= f.submit "新規登録", class: "btn btn-primary mt-3", data: {"data-dismiss" => "modal"} %>
+  </div>
+  <div class="modal-body col-6 d-flex flex-column justify-content-center">
+    <%= link_to "/auth/twitter", method: :post, class: "btn twitter" do %>
+    <p><i class="fab fa-twitter-square"></i> Twitterログイン</p>
+    <% end %>
+    <br>
+    <%= link_to "/auth/facebook", method: :post, class: "btn facebook" do %>
+    <p><i class="fab fa-facebook-square"></i> Facebookログイン</p>
+    <% end %>
+    <br>
+    <%= link_to "/auth/google_oauth2", method: :post, class: "btn google" do %>
+    <p><i class="fab fa-google"></i> Googleログイン</p>
+    <% end %>
+  </div>
 </div>
 <% end %>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+</div>

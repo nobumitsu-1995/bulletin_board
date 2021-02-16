@@ -47,3 +47,21 @@
   color: white;
   font-weight: bold;
  }
+ .twitter{
+   background-color: #1C9CEB;
+   height: 40px;
+   width: 200px;
+   color: white;
+ }
+ .facebook{
+   background-color: #4867AA;
+   height: 40px;
+   width: 200px;
+   color: white;
+ }
+ .google{
+   background-color: #EA4335;
+   height: 40px;
+   width: 200px;
+   color: white;
+ }

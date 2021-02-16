@@ -1,14 +1,27 @@
 <%= form_with(url: users_login_path, method: :post, class: "text-center") do |f| %>
-<div class="modal-body">
-  <%= f.label :login_email, "メールアドレス" %><br>
-  <%= f.text_field :login_email %><br>
-  <%= f.label :login_password, "パスワード" %><br>
-  <%= f.password_field :login_password %><br>
+<div class="row">
+  <div class="modal-body col-6">
+    <%= f.label :login_email, "メールアドレス" %><br>
+    <%= f.text_field :login_email %><br>
+    <%= f.label :login_password, "パスワード" %><br>
+    <%= f.password_field :login_password %><br>
+    <%= f.submit "ログイン", class: "mt-3 btn btn-primary", data: {"data-dismiss" => "modal"} %>
+  </div>
+  <div class="modal-body col-6 d-flex flex-column justify-content-center">
+    <%= link_to "/auth/twitter", method: :post, class: "btn twitter" do %>
+    <p><i class="fab fa-twitter-square"></i> Twitterログイン</p>
+    <% end %>
+    <br>
+    <%= link_to "/auth/facebook", method: :post, class: "btn facebook" do %>
+    <p><i class="fab fa-facebook-square"></i> Facebookログイン</p>
+    <% end %>
+    <br>
+    <%= link_to "/auth/google_oauth2", method: :post, class: "btn google" do %>
+    <p><i class="fab fa-google"></i> Googleログイン</p>
+    <% end %>
+  </div>
 </div>
+<% end %>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-  <%= f.submit "ログイン", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
-  <%= link_to "Twitterログイン" ,"/auth/twitter", method: :post, class: "btn btn-primary"%>
-  <%= link_to "Facebookログイン" ,"/auth/facebook", method: :post, class: "btn btn-primary"%>
-
-<% end %>
+</div>

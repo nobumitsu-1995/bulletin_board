@@ -2,19 +2,20 @@
 <div class="modal-body">
   <%= f.label :name, "ユーザー名" %><br>
   <%= f.text_field :name, value: "#{@user.name}" %><br>
+  <%= f.label :image, "ユーザー画像" %><br>
+  <%= f.file_field :image %><br>
   <% if !@user.provider %>
     <%= f.label :email, "メールアドレス" %><br>
     <%= f.text_field :email, value: "#{@user.email}" %><br>
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.password_field :password %><br>
+    <%= f.label :password_confirmation, "パスワード確認" %><br>
+    <%= f.text_field :password_confirmation %><br>
   <% end %>
-  <%= f.label :image, "ユーザー画像" %><br>
-  <%= f.file_field :image %><br>
-  <%= f.label :password, "パスワード" %><br>
-  <%= f.password_field :password %><br>
-  <%= f.label :password_confirmation, "パスワード確認" %><br>
-  <%= f.text_field :password_confirmation %><br>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
   <%= f.submit "更新", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+  <%= link_to "ユーザー情報削除", user_path(@user.id), method: :delete, class: "btn btn-danger", data: { confirm: "アカウントを削除してもよろしいですか？尚、アカウントに紐づいた投稿も削除されます。" } %>
 </div>
 <% end %>
