@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :posts
+  validates :password_digest, presence: true
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
 
   def self.find_or_create_account(auth)
     provider = auth[:provider]

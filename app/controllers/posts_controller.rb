@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all.order(id: "desc").includes(:user)
+    @user = User.new
   end
 
   def create

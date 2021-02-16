@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   def create
     if params[:password]
       if params[:password] == params[:password_confirmation]
-        user = User.create!(user_params)
-        user.image = "default_image.jpeg"
-        if user.save
-          session[:login_user_id] = user.id
-          flash[:notice] = "#{user.name}でログインしました。"
+        @user = User.create(user_params)
+        @user.image = "default_image.jpeg"
+        if @user.save
+          session[:login_user_id] = @user.id
+          flash[:notice] = "#{@user.name}でログインしました。"
           redirect_to("/")
         else
           @posts = Post.all.order(id: "desc")

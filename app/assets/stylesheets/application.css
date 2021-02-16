@@ -47,6 +47,12 @@
   color: white;
   font-weight: bold;
  }
+ .error{
+   background-color: #F230D2;
+   padding: 0 16px;
+   color: white;
+   font-weight: bold;
+ }
  .twitter{
    background-color: #1C9CEB;
    height: 40px;
