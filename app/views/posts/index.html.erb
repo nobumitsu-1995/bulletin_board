@@ -5,7 +5,9 @@
       <%= f.submit "新規投稿" %>
     <% end %>
   </div>
+  <%= paginate @posts %>
   <div id="posts">
     <%= render @posts %>
   </div>
+  <%= paginate @posts %>
 </div>

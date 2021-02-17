@@ -9,12 +9,13 @@ class UsersController < ApplicationController
           flash[:notice] = "#{@user.name}でログインしました。"
           redirect_to("/")
         else
-          @posts = Post.all.order(id: "desc")
+          @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
           flash[:notice] = "ユーザー登録に失敗しました。"
           render("posts/index")
         end
       else
-        @posts = Post.all.order(id: "desc")
+        @user = User.new
+        @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
         flash[:notice] = "パスワードが一致しません"
         render("posts/index")
       end
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
             flash[:notice] = "#{@user.name}の情報を編集しました。"
             redirect_to("/")
           else #処理が正常に行かなかったとき
-            @posts = Post.all.order(id: "desc")
+            @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
             flash[:notice] = "ユーザー編集に失敗しました。"
             render("posts/index")
           end
@@ -66,13 +67,13 @@ class UsersController < ApplicationController
             flash[:notice] = "#{@user.name}の情報を編集しました。"
             redirect_to("/")
           else #処理が正常に行かなかったとき
-            @posts = Post.all.order(id: "desc")
+            @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
             flash[:notice] = "ユーザー編集に失敗しました。"
             render("posts/index")
           end
         end
       else #password_confirmationに問題があったとき
-        @posts = Post.all.order(id: "desc")
+        @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
         flash[:notice] = "パスワードが一致しません"
         render("posts/index")
       end
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
           flash[:notice] = "#{@user.name}の情報を編集しました。"
           redirect_to("/")
         else #処理が正常に行かなかったとき
-          @posts = Post.all.order(id: "desc")
+          @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
           flash[:notice] = "ユーザー編集に失敗しました。"
           render("posts/index")
         end
@@ -100,7 +101,7 @@ class UsersController < ApplicationController
           flash[:notice] = "#{@user.name}の情報を編集しました。"
           redirect_to("/")
         else #処理が正常に行かなかったとき
-          @posts = Post.all.order(id: "desc")
+          @posts = Post.all.order(id: "desc").page(params[:page]).per(15)
           flash[:notice] = "ユーザー編集に失敗しました。"
           render("posts/index")
         end
