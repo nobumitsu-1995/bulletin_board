@@ -59,3 +59,4 @@ gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'kaminari'
+gem "aws-sdk-s3", require: false
