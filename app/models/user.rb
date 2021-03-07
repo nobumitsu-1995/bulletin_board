@@ -18,7 +18,7 @@ class User < ApplicationRecord
       user.name = name
       user.email = email
       user.password_digest = password_digest
-      user.avatar = avatar
+      user.avatar.attach(avatar)
     end
   end
 

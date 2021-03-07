@@ -2,8 +2,8 @@
 <div class="modal-body">
   <%= f.label :name, "ユーザー名" %><br>
   <%= f.text_field :name, value: "#{@user.name}" %><br>
-  <%= f.label :image, "ユーザー画像" %><br>
-  <%= f.file_field :image %><br>
+  <%= f.label :avatar, "ユーザー画像" %><br>
+  <%= f.file_field :avatar %><br>
   <% if !@user.provider %>
     <%= f.label :email, "メールアドレス" %><br>
     <%= f.text_field :email, value: "#{@user.email}" %><br>
