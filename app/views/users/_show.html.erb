@@ -6,6 +6,9 @@
   <li>ユーザーID：　<%= @user.id %></li>
   <li>ユーザー名：　<%= @user.name %></li>
   <li><%= @user.provider %>のアカウントでログインしています。</li>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+  </div>
   <% else %>
   <li>
     <% if @user.avatar.attached? %>
@@ -18,11 +21,11 @@
   <li>ユーザーID：　<%= @user.id %></li>
   <li>ユーザー名：　<%= @user.name %></li>
   <li>登録メールアドレス：　<%= @user.email %></li>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+    <% if @current_user.id == @user.id %>
+      <%= link_to("編集", edit_user_path(@user.id), remote: true, class: "btn btn-primary") %>
+    <% end %>
+  </div>
   <% end %>
 </ul>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-  <% if @current_user.id == @user.id %>
-    <%= link_to("編集", edit_user_path(@user.id), remote: true, class: "btn btn-primary") %>
-  <% end %>
-</div>
