@@ -9,9 +9,10 @@
   <% else %>
   <li>
     <% if @user.avatar.attached? %>
-      <img class="user_image mb-3" src="<%= @user.avatar %>">
-    <% else %>
-      <img class="user_image mb-3" src="<%= "/user_image/#{@user.image}" %>">
+      <%= image_tag(@user.avatar, :class => "user_image mb-3") %>
+    <% end %>
+    <% if @user.image %>
+      <%= image_tag("/user_image/#{@user.image}", :class => "user_image mb-3") %>
     <% end %>
   </li>
   <li>ユーザーID：　<%= @user.id %></li>
