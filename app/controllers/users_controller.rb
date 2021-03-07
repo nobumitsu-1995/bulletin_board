@@ -52,8 +52,8 @@ class UsersController < ApplicationController
       if params[:password] == params[:password_confirmation]
         @user = User.find_by(id: params[:id])
         @user.update(user_params)
-        if params[:image] #イメージ画像を編集するとき
-          write_image(params[:image])
+        if params[:avatar] #イメージ画像を編集するとき
+          write_image(params[:avatar])
           if @user.save #処理が正常に行ったとき
             flash[:notice] = "#{@user.name}の情報を編集しました。"
             redirect_to("/")
@@ -78,8 +78,8 @@ class UsersController < ApplicationController
         render("posts/index")
       end
     else #パスワードの編集をしないとき
-      if params[:image] #イメージ画像を編集するとき
-        write_image(params[:image])
+      if params[:avatar] #イメージ画像を編集するとき
+        write_image(params[:avatar])
         user.update(
           name: params[:name],
           email: params[:email]
