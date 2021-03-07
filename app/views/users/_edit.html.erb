@@ -15,7 +15,9 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-  <%= f.submit "更新", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+  <% if !@user.provider %>
+    <%= f.submit "更新", class: "btn btn-primary", data: {"data-dismiss" => "modal"} %>
+  <% end %>
   <%= link_to "ユーザー情報削除", user_path(@user.id), method: :delete, class: "btn btn-danger", data: { confirm: "アカウントを削除してもよろしいですか？尚、アカウントに紐づいた投稿も削除されます。" } %>
 </div>
 <% end %>
