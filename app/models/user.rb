@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :posts
-  has_one_attached :image
+  has_one_attached :avatar
   validates :password_digest, presence: true
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -10,7 +10,7 @@ class User < ApplicationRecord
     provider = auth[:provider]
     uid = auth[:uid]
     name = auth[:info][:name]
-    image = auth[:info][:image]
+    avatar = auth[:info][:image]
     email = auth[:uid]
     password_digest = auth[:uid]
 
@@ -18,7 +18,7 @@ class User < ApplicationRecord
       user.name = name
       user.email = email
       user.password_digest = password_digest
-      user.image = image
+      user.avatar = avatar
     end
   end
 

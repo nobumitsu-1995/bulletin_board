@@ -147,8 +147,8 @@ class UsersController < ApplicationController
   end
 
   def write_image(params)
-    @user.image = "#{@user.id}.jpeg"
-    File.binwrite("public/user_image/#{@user.image}", params.read)
+    @user.image = nil
+    @user.avatar.attach(params)
   end
 
 end

@@ -1,14 +1,18 @@
 <ul class="text-center p-0">
   <% if @user.provider %>
   <li>
-    <img class="user_image mb-3" src="<%= @user.image %>">
+    <img class="user_image mb-3" src="<%= @user.avatar %>">
   </li>
   <li>ユーザーID：　<%= @user.id %></li>
   <li>ユーザー名：　<%= @user.name %></li>
   <li><%= @user.provider %>のアカウントでログインしています。</li>
   <% else %>
   <li>
-    <img class="user_image mb-3" src="<%= "/user_image/#{@user.image}" %>">
+    <% if @user.avatar.attached? %>
+      <img class="user_image mb-3" src="<%= @user.avatar %>">
+    <% else %>
+      <img class="user_image mb-3" src="<%= "/user_image/#{@user.image}" %>">
+    <% end %>
   </li>
   <li>ユーザーID：　<%= @user.id %></li>
   <li>ユーザー名：　<%= @user.name %></li>
